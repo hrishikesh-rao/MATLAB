@@ -1,0 +1,35 @@
+clc;
+close all;
+clear all;
+xn = input('Enter the sequence x(n): ');
+hn = input('Enter the sequence h(n): ');
+N = length(xn) + length(hn)-1;
+xk = fft(xn, N);
+hk = fft(hn, N);
+yk = xk.*hk; % .* multiplies every element of xk to
+hk yn = ifft(yk, N);
+disp('Linear Convolution of x(n) & h(n): ');
+disp(yn);
+subplot(2,2,1);
+stem(xn);
+xlabel('n');
+ylabel('x(n)');
+title('plot of x(n)');
+subplot(2,2,2);
+stem(hn);
+xlabel('n');
+ylabel('h(n)');
+title('plot of h(n)');
+subplot(2,2,3);
+stem(yn);
+xlabel('n');
+ylabel('y(n)');
+title('DFT IDFT convolution output');
+% Verification
+yv = conv(xn, hn);
+disp(yv);
+subplot(2,2,4);
+stem(yv);
+xlabel('n');
+ylabel('yv(n)');
+title('verified convolution');
